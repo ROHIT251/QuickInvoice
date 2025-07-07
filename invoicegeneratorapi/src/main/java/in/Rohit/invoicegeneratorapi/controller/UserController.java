@@ -1,7 +1,7 @@
-package in.bushansirgur.invoicegeneratorapi.controller;
+package in.Rohit.invoicegeneratorapi.controller;
 
-import in.bushansirgur.invoicegeneratorapi.entity.User;
-import in.bushansirgur.invoicegeneratorapi.service.UserService;
+import in.Rohit.invoicegeneratorapi.entity.User;
+import in.Rohit.invoicegeneratorapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;

@@ -1,4 +1,4 @@
-package in.bushansirgur.invoicegeneratorapi.service;
+package in.Rohit.invoicegeneratorapi.service;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

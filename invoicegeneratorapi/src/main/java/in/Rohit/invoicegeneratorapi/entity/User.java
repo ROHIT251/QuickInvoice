@@ -1,4 +1,4 @@
-package in.bushansirgur.invoicegeneratorapi.entity;
+package in.Rohit.invoicegeneratorapi.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

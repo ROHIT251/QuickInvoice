@@ -1,7 +1,7 @@
-package in.bushansirgur.invoicegeneratorapi.service;
+package in.Rohit.invoicegeneratorapi.service;
 
-import in.bushansirgur.invoicegeneratorapi.entity.Invoice;
-import in.bushansirgur.invoicegeneratorapi.repository.InvoiceRepository;
+import in.Rohit.invoicegeneratorapi.entity.Invoice;
+import in.Rohit.invoicegeneratorapi.repository.InvoiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

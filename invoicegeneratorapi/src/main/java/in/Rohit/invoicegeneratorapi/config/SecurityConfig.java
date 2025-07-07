@@ -1,6 +1,6 @@
-package in.bushansirgur.invoicegeneratorapi.config;
+package in.Rohit.invoicegeneratorapi.config;
 
-import in.bushansirgur.invoicegeneratorapi.security.ClerkJwtAuthFilter;
+import in.Rohit.invoicegeneratorapi.security.ClerkJwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

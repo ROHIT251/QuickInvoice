@@ -1,7 +1,7 @@
-package in.bushansirgur.invoicegeneratorapi.service;
+package in.Rohit.invoicegeneratorapi.service;
 
-import in.bushansirgur.invoicegeneratorapi.entity.User;
-import in.bushansirgur.invoicegeneratorapi.repository.UserRepository;
+import in.Rohit.invoicegeneratorapi.entity.User;
+import in.Rohit.invoicegeneratorapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
