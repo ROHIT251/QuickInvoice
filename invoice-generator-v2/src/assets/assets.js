@@ -1,9 +1,9 @@
 // 🔸 Templates
-import template1 from './template1.png';
-import template2 from './template2.png';
-import template3 from './template3.png';
-import template4 from './template4.png';
-import template5 from './template5.png';
+import Template1 from './template1.png';
+import Template2 from './template2.png';
+import Template3 from './template3.png';
+import Template4 from './template4.png';
+import Template5 from './template5.png';
 
 // 🔸 Other assets
 import upload_area from './upload_area.png';
@@ -23,11 +23,11 @@ import imagee4 from './imagee4.jpg';
 
 // Export normal assets
 export const assets = {
-  template1,
-  template2,
-  template3,
-  template4,
-  template5,
+  Template1,
+  Template2,
+  Template3,
+  Template4,
+  Template5,
   upload_area,
   logo,
   landing1,
@@ -44,11 +44,11 @@ export const sliderImages = {
   imagee4,
 };
 
-// Export template array
+// ✅ Fix: use correct variable names here
 export const templates = [
-  { id: "template1", label: "Template 1", image: template1 },
-  { id: "template2", label: "Template 2", image: template2 },
-  { id: "template3", label: "Template 3", image: template3 },
-  { id: "template4", label: "Template 4", image: template4 },
-  { id: "template5", label: "Template 5", image: template5 },
+  { id: "template1", label: "Template 1", image: Template1 },
+  { id: "template2", label: "Template 2", image: Template2 },
+  { id: "template3", label: "Template 3", image: Template3 },
+  { id: "template4", label: "Template 4", image: Template4 },
+  { id: "template5", label: "Template 5", image: Template5 },
 ];
