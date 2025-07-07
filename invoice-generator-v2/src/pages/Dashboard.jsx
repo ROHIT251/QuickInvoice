@@ -6,6 +6,19 @@ import { getAllInvoices } from "../service/invoiceService.js";
 import toast from "react-hot-toast";
 import { useAuth } from "@clerk/clerk-react";
 
+
+
+const formatDate = (dateStr) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+};
+
+
+
 function Dashboard() {
   const [invoices, setInvoices] = useState([]);
   const navigate = useNavigate();

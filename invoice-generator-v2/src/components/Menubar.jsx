@@ -35,7 +35,7 @@ const Menubar = () => {
           <Logo />
           <span
             className="fw-bolder fs-4 mx-3"
-            style={{ letterSpacing: "-0.5px", color: "#0D6EFDB2" }}
+            style={{ letterSpacing: "-0.5px", color: " #0D1C16" }}
           >
             QuickInvoice
           </span>

@@ -1,28 +1,18 @@
 import Logo from "../../components/Logo.jsx";
-import {useContext} from "react";
-import './LandingPage.css';
-import {useClerk, useUser} from "@clerk/clerk-react";
-import {useNavigate} from "react-router-dom";
-import {AppContext, initialInvoiceData} from "../../context/AppContext.jsx";
-import {assets} from "../../assets/assets.js";
+import { useContext } from "react";
+import "./LandingPage.css"; // Ensure this path is correct
+import { useClerk, useUser } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
+import { AppContext, initialInvoiceData } from "../../context/AppContext.jsx";
+import { assets, sliderImages } from "../../assets/assets.js";
+
+
 
 const LandingPage = () => {
-    const {user} = useUser();
+    const { user } = useUser();
     const navigate = useNavigate();
-    const {openSignIn} = useClerk();
-    const {setInvoiceData, setSelectedTemplate, setInvoiceTitle} = useContext(AppContext);
-    // useEffect(() => {
-    //     // Get all elements with data-bs-toggle="tooltip"
-    //     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    //     // Initialize a new Bootstrap tooltip for each trigger element
-    //     tooltipTriggerList.map(function (tooltipTriggerEl) {
-    //         // Ensure window.bootstrap is available
-    //         if (window.bootstrap && typeof window.bootstrap.Tooltip === 'function') {
-    //             return new window.bootstrap.Tooltip(tooltipTriggerEl);
-    //         }
-    //         return null;
-    //     });
-    // }, []); // Empty dependency array means this effect runs only once on mount
+    const { openSignIn } = useClerk();
+    const { setInvoiceData, setSelectedTemplate, setInvoiceTitle } = useContext(AppContext);
 
     const handleActionButton = () => {
         if (user) {
@@ -33,28 +23,87 @@ const LandingPage = () => {
         } else {
             openSignIn({});
         }
-    }
+    };
+
+    // Debug log to check component mount and assets
+    console.log("LandingPage component mounted, assets:", assets);
 
     return (
         <>
-            {/* Hero Section: Full-width, centered text with background image */}
-            <header id="hero" className="hero-section text-white text-center">
-                <div className="container py-5 d-flex flex-column justify-content-center" style={{ minHeight: '85vh' }}>
+            {/* Hero Section: Full-width, centered text with sliding background images */}
+            <header id="hero" className="hero-section text-white text-center position-relative">
+                <div className="slider-background">
+                    <div className="slide">
+                        <img
+                        src={sliderImages.imagee1 || "https://placehold.co/1920x1080/FF0000/FFFFFF?text=Slide1"}
+                            alt="Slide 1"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "https://placehold.co/1920x1080/E0E0E0/000000?text=Error+Slide1";
+                                console.log("Slide 1 image load failed, final src:", e.target.src);
+                            }}
+                            onLoad={() => console.log("Slide 1 image loaded, src:", document.querySelector(".slide:nth-child(1) img").src)}
+                            style={{ visibility: "visible" }} // Force visibility for debug
+                        />
+                    </div>
+                    <div className="slide">
+                        <img
+                        src={sliderImages.imagee2 ||  "https://placehold.co/1920x1080/00FF00/FFFFFF?text=Slide2"}
+                            alt="Slide 2"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "https://placehold.co/1920x1080/E0E0E0/000000?text=Error+Slide2";
+                                console.log("Slide 2 image load failed, final src:", e.target.src);
+                            }}
+                            onLoad={() => console.log("Slide 2 image loaded, src:", document.querySelector(".slide:nth-child(2) img").src)}
+                            style={{ visibility: "visible" }} // Force visibility for debug
+                        />
+                    </div>
+                    <div className="slide">
+                        <img
+                            src={sliderImages.imagee3 || "https://placehold.co/1920x1080/0000FF/FFFFFF?text=Slide3"}
+                            alt="Slide 3"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "https://placehold.co/1920x1080/E0E0E0/000000?text=Error+Slide3";
+                                console.log("Slide 3 image load failed, final src:", e.target.src);
+                            }}
+                            onLoad={() => console.log("Slide 3 image loaded, src:", document.querySelector(".slide:nth-child(3) img").src)}
+                            style={{ visibility: "visible" }} // Force visibility for debug
+                        />
+                    </div>
+                    <div className="slide">
+                        <img
+                        src={sliderImages.imagee4 ||"https://placehold.co/1920x1080/FFFF00/000000?text=Slide4"}
+                            alt="Slide 4"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "https://placehold.co/1920x1080/E0E0E0/000000?text=Error+Slide4";
+                                console.log("Slide 4 image load failed, final src:", e.target.src);
+                            }}
+                            onLoad={() => console.log("Slide 4 image loaded, src:", document.querySelector(".slide:nth-child(4) img").src)}
+                            style={{ visibility: "visible" }} // Force visibility for debug
+                        />
+                    </div>
+                </div>
+                <div className="container py-5 d-flex flex-column justify-content-center" style={{ minHeight: "85vh" }}>
                     <div className="row py-lg-5">
                         <div className="col-lg-9 col-md-10 mx-auto">
-                            <h1 className="display-3 fw-bold mb-4">
-                                Effortless Invoicing. Professional Results.
-                            </h1>
-                            <p className="lead mb-5" style={{ fontSize: '1.3rem' }}>
+                            <h1 className="display-3 fw-bold mb-4">Effortless Invoicing. Professional Results.</h1>
+                            <p className="lead mb-5" style={{ fontSize: "1.3rem" }}>
                                 Stop wrestling with spreadsheets. QuickInvoice helps you create and send beautiful invoices in minutes, so you get paid faster.
                             </p>
                             <p>
-                                {/* Primary call to action */}
-                                <button onClick={handleActionButton} className="btn btn-lg btn-warning fw-bold rounded-pill my-2 mx-1 px-5 py-3">
+                                <button
+                                    onClick={handleActionButton}
+                                    className="btn btn-lg btn-warning fw-bold rounded-pill my-2 mx-1 px-5 py-3"
+                                >
                                     Generate Your First Invoice
                                 </button>
-                                {/* Secondary call to action */}
-                                <a href="#how-it-works" className="btn btn-lg btn-outline-light rounded-pill my-2 mx-1 px-5 py-3">
+                                <a
+                                    href="#how-it-works"
+                                    className="btn btn-lg btn-outline-light rounded-pill my-2 mx-1 px-5 py-3"
+                                >
                                     Learn More
                                 </a>
                             </p>
@@ -68,7 +117,6 @@ const LandingPage = () => {
                 <div className="container">
                     <h2 className="text-center mb-5 display-5 fw-bold">Get Started in 4 Simple Steps</h2>
                     <div className="row g-4 justify-content-center">
-                        {/* Step 1 Card */}
                         <div className="col-md-6 col-lg-3 d-flex">
                             <div className="card h-100 shadow-sm border-0 text-center flex-fill">
                                 <div className="card-img-top-container d-flex align-items-center justify-content-center p-4 bg-primary-soft">
@@ -76,7 +124,10 @@ const LandingPage = () => {
                                         src="https://placehold.co/150x150/0D6EFD/FFFFFF?text=1&font=montserrat"
                                         className="rounded-circle"
                                         alt="Enter Invoice Details"
-                                        onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/150x150/E0E0E0/000000?text=Error'; }}
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = "https://placehold.co/150x150/E0E0E0/000000?text=Error";
+                                        }}
                                     />
                                 </div>
                                 <div className="card-body p-4">
@@ -87,8 +138,6 @@ const LandingPage = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Step 2 Card */}
                         <div className="col-md-6 col-lg-3 d-flex">
                             <div className="card h-100 shadow-sm border-0 text-center flex-fill">
                                 <div className="card-img-top-container d-flex align-items-center justify-content-center p-4 bg-success-soft">
@@ -96,7 +145,10 @@ const LandingPage = () => {
                                         src="https://placehold.co/150x150/198754/FFFFFF?text=2&font=montserrat"
                                         className="rounded-circle"
                                         alt="Choose Template"
-                                        onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/150x150/E0E0E0/000000?text=Error'; }}
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = "https://placehold.co/150x150/E0E0E0/000000?text=Error";
+                                        }}
                                     />
                                 </div>
                                 <div className="card-body p-4">
@@ -107,8 +159,6 @@ const LandingPage = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Step 3 Card */}
                         <div className="col-md-6 col-lg-3 d-flex">
                             <div className="card h-100 shadow-sm border-0 text-center flex-fill">
                                 <div className="card-img-top-container d-flex align-items-center justify-content-center p-4 bg-warning-soft">
@@ -116,7 +166,10 @@ const LandingPage = () => {
                                         src="https://placehold.co/150x150/FFC107/000000?text=3&font=montserrat"
                                         className="rounded-circle"
                                         alt="Preview Invoice"
-                                        onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/150x150/E0E0E0/000000?text=Error'; }}
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = "https://placehold.co/150x150/E0E0E0/000000?text=Error";
+                                        }}
                                     />
                                 </div>
                                 <div className="card-body p-4">
@@ -127,8 +180,6 @@ const LandingPage = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Step 4 Card */}
                         <div className="col-md-6 col-lg-3 d-flex">
                             <div className="card h-100 shadow-sm border-0 text-center flex-fill">
                                 <div className="card-img-top-container d-flex align-items-center justify-content-center p-4 bg-info-soft">
@@ -136,7 +187,10 @@ const LandingPage = () => {
                                         src="https://placehold.co/150x150/0DCAF0/FFFFFF?text=4&font=montserrat"
                                         className="rounded-circle"
                                         alt="Download & Save"
-                                        onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/150x150/E0E0E0/000000?text=Error'; }}
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = "https://placehold.co/150x150/E0E0E0/000000?text=Error";
+                                        }}
                                     />
                                 </div>
                                 <div className="card-body p-4">
@@ -159,45 +213,68 @@ const LandingPage = () => {
                     <div className="row align-items-center gy-4">
                         <div className="col-md-6">
                             <img
-                                src={assets.landing1}
+                                src={assets.landing1 || "https://placehold.co/600x400/FF0000/E0E0E0?text=Feature1"}
                                 className="img-fluid rounded shadow-lg"
                                 alt="Invoice Customization"
-                                onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/E0E0E0/000000?text=Error'; }}
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = "https://placehold.co/600x400/E0E0E0/000000?text=Error";
+                                    console.log("Feature 1 image load failed");
+                                }}
+                                onLoad={() => console.log("Feature 1 image loaded")}
                             />
                         </div>
                         <div className="col-md-6">
                             <h3 className="fw-bold mx-2">Easy to fill invoice details</h3>
                             <p className="text-muted lead fs-6 mx-2">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                              
                             </p>
                             <ul className="list-unstyled text-muted">
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Curated list of templates from gallery.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Add your logo and invoice details.</li>
-                                <li><i className="bi bi-check-circle-fill text-primary me-2"></i>Tailor fields to your needs.</li>
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>Curated list of templates from gallery.
+                                </li>
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>Add your logo and invoice details.
+                                </li>
+                                <li>
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>Tailor fields to your needs.
+                                </li>
                             </ul>
                         </div>
                     </div>
                     {/* Feature 2 */}
-                    <div className="row align-items-center gy-4 mt-5 flex-row-reverse"> {/* flex-row-reverse alternates image/text */}
+                    <div className="row align-items-center gy-4 mt-5 flex-row-reverse">
                         <div className="col-md-6">
                             <img
-                                src={assets.landing2}
+                                src={assets.landing2 || "https://placehold.co/600x400/00FF00/E0E0E0?text=Feature2"}
                                 className="img-fluid rounded shadow-lg"
                                 alt="Time Saving"
-                                onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/E0E0E0/000000?text=Error'; }}
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = "https://placehold.co/600x400/E0E0E0/000000?text=Error";
+                                    console.log("Feature 2 image load failed");
+                                }}
+                                onLoad={() => console.log("Feature 2 image loaded")}
                             />
                         </div>
                         <div className="col-md-6">
                             <h3 className="fw-bold mx-2">Beautiful Dashboard</h3>
                             <p className="text-muted lead fs-6 mx-2">
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
                             </p>
                             <ul className="list-unstyled text-muted">
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>View the previous invoices.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Your saved invoices with thumbnail.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Reuse one or more invoices.</li>
-                                <li><i className="bi bi-check-circle-fill text-primary me-2"></i>Track the invoices.</li>
-
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>View the previous invoices.
+                                </li>
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>Your saved invoices with thumbnail.
+                                </li>
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>Reuse one or more invoices.
+                                </li>
+                                <li>
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>Track the invoices.
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -205,44 +282,65 @@ const LandingPage = () => {
                     <div className="row align-items-center gy-4 mt-5">
                         <div className="col-md-6">
                             <img
-                                src={assets.landing3}
+                                src={assets.landing3 || "https://placehold.co/600x400/0000FF/E0E0E0?text=Feature3"}
                                 className="img-fluid rounded shadow-lg"
                                 alt="Invoice Customization"
-                                onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/E0E0E0/000000?text=Error'; }}
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = "https://placehold.co/600x400/E0E0E0/000000?text=Error";
+                                    console.log("Feature 3 image load failed");
+                                }}
+                                onLoad={() => console.log("Feature 3 image loaded")}
                             />
                         </div>
                         <div className="col-md-6">
                             <h3 className="fw-bold mx-2">Invoice Preview with Action Buttons</h3>
                             <p className="text-muted lead fs-6 mx-2">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                
                             </p>
                             <ul className="list-unstyled text-muted">
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Live preview.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Switch between multiple invoices.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>One click to Save, Download and Delete invoices.</li>
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>Live preview.
+                                </li>
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>Switch between multiple invoices.
+                                </li>
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>One click to Save, Download and Delete invoices.
+                                </li>
                             </ul>
                         </div>
                     </div>
                     {/* Feature 4 */}
-                    <div className="row align-items-center gy-4 mt-5 flex-row-reverse"> {/* flex-row-reverse alternates image/text */}
+                    <div className="row align-items-center gy-4 mt-5 flex-row-reverse">
                         <div className="col-md-6">
                             <img
-                                src={assets.landing4}
+                                src={assets.landing4 || "https://placehold.co/600x400/FFFF00/000000?text=Feature4"}
                                 className="img-fluid rounded shadow-lg"
                                 alt="Time Saving"
-                                onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/E0E0E0/000000?text=Error'; }}
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = "https://placehold.co/600x400/E0E0E0/000000?text=Error";
+                                    console.log("Feature 4 image load failed");
+                                }}
+                                onLoad={() => console.log("Feature 4 image loaded")}
                             />
                         </div>
                         <div className="col-md-6">
                             <h3 className="fw-bold mx-2">Send invoices instantly</h3>
                             <p className="text-muted lead fs-6 mx-2">
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                
                             </p>
                             <ul className="list-unstyled text-muted">
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Send invoices instantly without leaving the application.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>One click to send invoices.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Send unlimited invoices.</li>
-
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>Send invoices instantly without leaving the application.
+                                </li>
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>One click to send invoices.
+                                </li>
+                                <li className="mb-2">
+                                    <i className="bi bi-check-circle-fill text-primary me-2"></i>Send unlimited invoices.
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -253,16 +351,13 @@ const LandingPage = () => {
             <section id="generate-invoice" className="py-5 text-center bg-primary text-white">
                 <div className="container">
                     <h2 className="display-5 fw-bold mb-3">Ready to Streamline Your Invoicing?</h2>
-                    <p className="lead mb-4 mx-auto" style={{ maxWidth: '600px' }}>
-                        Join thousands of freelancers and small businesses who trust QuickInvoice.
-                        Start creating professional invoices today – its fast, easy, and effective!
+                    <p className="lead mb-4 mx-auto" style={{ maxWidth: "600px" }}>
+                        Join thousands of freelancers and small businesses who trust QuickInvoice. Start creating professional invoices today – its fast, easy, and effective!
                     </p>
                     <button className="btn btn-lg btn-warning fw-bold rounded-pill px-5 py-3" onClick={handleActionButton}>
                         Start Generating Invoices Now
                     </button>
-                    <p className="mt-3 small">
-                        (This will lead to the invoice generation interface)
-                    </p>
+                    <p className="mt-3 small">(This will lead to the invoice generation interface)</p>
                 </div>
             </section>
 
@@ -271,22 +366,25 @@ const LandingPage = () => {
                 <div className="container text-center">
                     <Logo />
                     <p className="text-white fw-bold mt-2">QuickInvoice</p>
-                    <p className="mb-0">
-                        &copy; {new Date().getFullYear()} QuickInvoice. All Rights Reserved.
-                    </p>
+                    <p className="mb-0">© {new Date().getFullYear()} QuickInvoice. All Rights Reserved.</p>
                     <p className="mb-0 small">
-                        Crafted with <i className="bi bi-heart-fill text-danger"></i> for freelancers and small businesses.
+                        Created By <i className="bi bi-heart-fill text-danger"></i> Rohit Ram.
                     </p>
                     <p className="mt-2">
-                        {/* Placeholder social media links */}
-                        <a href="#" className="text-white-50 me-2"><i className="bi bi-twitter-x"></i></a>
-                        <a href="#" className="text-white-50 me-2"><i className="bi bi-facebook"></i></a>
-                        <a href="#" className="text-white-50"><i className="bi bi-linkedin"></i></a>
+                        <a href="#" className="text-white-50 me-2">
+                            <i className="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" className="text-white-50 me-2">
+                            <i className="bi bi-facebook"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ritesh-kumar-choudhary-267768247/" className="text-white-50">
+                            <i className="bi bi-linkedin"></i>
+                        </a>
                     </p>
                 </div>
             </footer>
         </>
     );
-}
+};
 
 export default LandingPage;
